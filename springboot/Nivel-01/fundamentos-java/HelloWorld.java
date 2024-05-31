@@ -1,7 +1,3 @@
-/*
-* NOTE: This folder and files next should be files content activities
-* with purposes reviews about Java fundamentals only.
-* */
 public class HelloWorld {
     public static void main(String[] args) {
         /*
