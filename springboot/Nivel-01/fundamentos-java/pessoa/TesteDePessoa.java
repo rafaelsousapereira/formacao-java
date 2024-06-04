@@ -9,13 +9,13 @@ public class TesteDePessoa {
         professor.setNome("Rafael");
         professor.setIdade(33);
         professor.setSalario(20000);
-        System.out.println(professor.imprimirDadosDaPessoa() + " e o salário é " + professor.getSalario());
+        System.out.println(professor.imprimirDadosDaPessoa());
 
         Aluno aluno = new Aluno();
         aluno.setMatricula("000999");
         aluno.setCpf("55566677700");
         aluno.setNome("Maria");
         aluno.setIdade(17);
-        System.out.println(aluno.imprimirDadosDaPessoa() + " e a matricula é " + aluno.getMatricula());
+        System.out.println(aluno.imprimirDadosDaPessoa());
     }
 }

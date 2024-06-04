@@ -33,6 +33,6 @@ public class Pessoa {
     }
 
     String imprimirDadosDaPessoa() {
-        return "O nome da pessoa é " + nome + " a idade é " + idade + " anos" + "o documento é " + cpf;
+        return "O nome da pessoa é " + nome + ", a idade é " + idade + " anos" + " e o documento é " + cpf;
     }
 }
