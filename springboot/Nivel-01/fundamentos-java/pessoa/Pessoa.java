@@ -8,9 +8,31 @@ public class Pessoa {
     int idade;
     String cpf;
 
-    String imprimirDadosDaPessoa(Integer indice) {
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
-        return "O nome da pessoa é " + nome + " a idade é "
-                + idade + " anos" + "o documento é " + cpf + "e o índice é " + indice;
+    public String getNome() {
+        return nome;
+    }
+
+    public void setIdade(int idade) {
+        this.idade = idade;
+    }
+
+    public int getIdade() {
+        return idade;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    String imprimirDadosDaPessoa() {
+        return "O nome da pessoa é " + nome + " a idade é " + idade + " anos" + "o documento é " + cpf;
     }
 }
