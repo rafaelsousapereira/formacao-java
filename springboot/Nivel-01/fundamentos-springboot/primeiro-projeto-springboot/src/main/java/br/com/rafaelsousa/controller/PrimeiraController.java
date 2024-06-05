@@ -1,4 +1,4 @@
-package br.com.rafaelsousa.main.controller;
+package br.com.rafaelsousa.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
