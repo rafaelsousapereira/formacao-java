@@ -1,5 +1,6 @@
 package br.com.rafaelsousa.gestao_vagas.modules.candidate.controllers;
 
+import br.com.rafaelsousa.gestao_vagas.exceptions.UserFoundException;
 import br.com.rafaelsousa.gestao_vagas.modules.candidate.CandidateEntity;
 import br.com.rafaelsousa.gestao_vagas.modules.candidate.CandidateRepository;
 import jakarta.validation.Valid;
@@ -14,10 +15,15 @@ import org.springframework.web.bind.annotation.RestController;
 public class CandidateController {
 
     @Autowired
-    private CandidateRepository candidateRepository;
+    public CandidateRepository candidateRepository;
 
     @PostMapping("/")
     public CandidateEntity create(@Valid @RequestBody CandidateEntity candidateEntity) {
+        this.candidateRepository
+                .findByUsernameOrEmail(candidateEntity.getUsername(), candidateEntity.getEmail())
+                .ifPresent((user) -> {
+                    throw new UserFoundException("Usuário já existe");
+                });
         return candidateRepository.save(candidateEntity);
     }
 }
