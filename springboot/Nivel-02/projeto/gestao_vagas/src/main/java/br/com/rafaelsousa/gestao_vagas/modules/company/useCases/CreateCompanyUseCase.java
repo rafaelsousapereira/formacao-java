@@ -1,6 +1,6 @@
 package br.com.rafaelsousa.gestao_vagas.modules.company.useCases;
 
-import br.com.rafaelsousa.gestao_vagas.exceptions.UserFoundException;
+import br.com.rafaelsousa.gestao_vagas.exceptions.UserNotFoundException;
 import br.com.rafaelsousa.gestao_vagas.modules.company.entities.CompanyEntity;
 import br.com.rafaelsousa.gestao_vagas.modules.company.repositories.CompanyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +22,7 @@ public class CreateCompanyUseCase {
         this.companyRepository
                 .findByUsernameOrEmail(companyEntity.getUsername(), companyEntity.getEmail())
                 .ifPresent((user) -> {
-                    throw new UserFoundException("Empresa já existe");
+                    throw new UserNotFoundException("Empresa já existe");
                 });
         var password = passwordEncoder.encode(companyEntity.getPassword());
         companyEntity.setPassword(password);

@@ -1,6 +1,6 @@
 package br.com.rafaelsousa.gestao_vagas.modules.company.useCases;
 
-import br.com.rafaelsousa.gestao_vagas.exceptions.UserFoundException;
+import br.com.rafaelsousa.gestao_vagas.exceptions.UserNotFoundException;
 import br.com.rafaelsousa.gestao_vagas.modules.company.dto.AuthCompanyDTO;
 import br.com.rafaelsousa.gestao_vagas.modules.company.repositories.CompanyRepository;
 import com.auth0.jwt.JWT;
@@ -29,7 +29,7 @@ public class AuthCompanyUseCase {
     public String execute(AuthCompanyDTO authCompanyDTO) throws AuthenticationException {
 
         var company = companyRepository.findByUsername(authCompanyDTO.getUsername())
-                .orElseThrow(() -> new UserFoundException("Username or password incorrect"));
+                .orElseThrow(() -> new UserNotFoundException("Username/password incorretos"));
 
         // Verificar se as senhas são iguais
         var isPasswordMatches = this.passwordEncoder.matches(authCompanyDTO.getPassword(), company.getPassword());
