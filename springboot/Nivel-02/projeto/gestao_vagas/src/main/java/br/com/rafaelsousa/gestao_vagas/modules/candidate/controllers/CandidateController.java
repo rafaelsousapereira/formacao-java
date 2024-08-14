@@ -22,7 +22,7 @@ public class CandidateController {
         try {
             var result = this.createCandidateUseCase.execute(candidateEntity);
             return ResponseEntity.ok().body(result);
-        }catch (Exception ex) {
+        } catch (Exception ex) {
             return ResponseEntity.badRequest().body(ex.getMessage());
         }
     }
