@@ -14,6 +14,8 @@ import org.springframework.stereotype.Service;
 import javax.naming.AuthenticationException;
 import java.time.Duration;
 import java.time.Instant;
+import java.util.Arrays;
+import java.util.List;
 
 @Service
 public class AuthCandidateUseCase {
@@ -26,6 +28,8 @@ public class AuthCandidateUseCase {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    private final Instant expiresIn = Instant.now().plus(Duration.ofMinutes(10));
 
     public AuthCandidateResponseDTO execute(AuthCandidateRequestDTO authCandidateRequestDTO) throws AuthenticationException {
         var candidate = this.candidateRepository.findByUsername(authCandidateRequestDTO.username())
@@ -40,9 +44,13 @@ public class AuthCandidateUseCase {
         Algorithm algorithm = Algorithm.HMAC256(secretKey);
         var token = JWT.create().withIssuer("javagas")
                 .withSubject(candidate.getId().toString())
-                .withExpiresAt(Instant.now().plus(Duration.ofMinutes(10)))
+                .withClaim("roles", List.of("candidate"))
+                .withExpiresAt(expiresIn)
                 .sign(algorithm);
 
-        return AuthCandidateResponseDTO.builder().accessToken(token).build();
+        return AuthCandidateResponseDTO.builder()
+                .accessToken(token)
+                .expiresIn(expiresIn.toEpochMilli())
+                .build();
     }
 }
